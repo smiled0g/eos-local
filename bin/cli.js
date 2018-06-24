@@ -17,7 +17,7 @@ function error(topic, detail) {
 function main() {
   const docker = new LocalDocker()
 
-  CLI.version('0.2.0')
+  CLI.version('0.2.1')
 
   CLI.command('run [instance_name]')
     .option(
@@ -59,6 +59,7 @@ function main() {
                     incomplete: ' ',
                     width: 50,
                     total: totalProgress,
+                    clear: true,
                   }
                 )
               }
@@ -72,14 +73,15 @@ function main() {
 
               progressBar.tick(currentProgress - lastProgress)
               lastProgress = currentProgress
-              return false
+              break
             case LocalDocker.RUN_STATUS.IMAGE_PULL_EXTRACTING:
-              if (lastProgress < totalProgress) {
+              if (progressBar) {
                 progressBar.tick(totalProgress - lastProgress)
-                lastProgress = totalProgress
-                log('Run', 'Extracting image')
+                progressBar.terminate()
+                progressBar = null
+                setTimeout(() => log('Run', 'Extracting image'))
               }
-              return false
+              break
             case LocalDocker.RUN_STATUS.IMAGE_PULL_DONE:
               return log('Run', 'Image ready')
             case LocalDocker.RUN_STATUS.CONTAINER_FOUND:

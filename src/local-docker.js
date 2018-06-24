@@ -40,6 +40,8 @@ class LocalDocker {
     const tag = image.split(':')[1] || 'latest'
 
     return new Promise((resolve, reject) => {
+      onPullProgress(PULL_STATUS.START)
+
       this.docker.modem.dial(
         {
           path: `/images/create?fromImage=${repo}&tag=${tag} `,
@@ -61,12 +63,9 @@ class LocalDocker {
             stream,
             () => {
               onPullProgress(PULL_STATUS.DONE)
-
               resolve()
             },
             e => {
-              onPullProgress(PULL_STATUS.START)
-
               if (e.status === 'Waiting') {
                 progress[e.id] = {
                   current: 0,
@@ -105,7 +104,6 @@ class LocalDocker {
       await this.pull(image, (status, progress) => {
         switch (status) {
           case PULL_STATUS.START:
-            return
             return onRunProgress({
               status: RUN_STATUS.IMAGE_PULL_START,
             })
