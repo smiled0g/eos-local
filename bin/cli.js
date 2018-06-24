@@ -19,7 +19,8 @@ function main() {
 
   CLI.version('0.2.2')
 
-  CLI.command('run [instance_name]')
+  CLI.command('start [instance_name]')
+    .alias('run')
     .option(
       '-m, --image <image>',
       'docker image (default = eosio/eos-dev:latest)'
