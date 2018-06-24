@@ -17,7 +17,7 @@ function error(topic, detail) {
 function main() {
   const docker = new LocalDocker()
 
-  CLI.version('0.2.1')
+  CLI.version('0.2.2')
 
   CLI.command('run [instance_name]')
     .option(
