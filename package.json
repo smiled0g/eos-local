@@ -1,6 +1,6 @@
 {
   "name": "eos-local",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Node.js tool to run EOS docker container",
   "main": "index.js",
   "author": "Paul Chonpimai <paul@bandprotocol.com>",
@@ -8,16 +8,21 @@
   "private": false,
   "dependencies": {
     "dockerode": "^2.5.5",
-    "is-subset": "^0.1.1"
+    "is-subset": "^0.1.1",
+    "colors": "^1.3.0",
+    "commander": "^2.15.1",
+    "progress": "^2.0.0"
+  },
+  "scripts": {
+    "start": "node ./bin/cli"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "eos-local": "./bin/cli.js"
   },
   "prettier": {
     "trailingComma": "es5",
     "semi": false,
     "singleQuote": true
-  },
-  "devDependencies": {
-    "colors": "^1.3.0",
-    "commander": "^2.15.1",
-    "progress": "^2.0.0"
   }
 }

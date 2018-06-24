@@ -44,7 +44,7 @@ eos.stop({
 })
 ```
 
-Take a look at `src/cli.js` for more example.
+Take a look at `bin/cli.js` for more example of Node.js use. More documentaiton coming soon.
 
 ## CLI Usage
 

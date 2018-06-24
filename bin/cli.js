@@ -1,8 +1,10 @@
+#!/usr/bin/env node
+
 const CLI = require('commander')
 const ProgressBar = require('progress')
 const Colors = require('colors')
 
-const LocalDocker = require('./local-docker')
+const LocalDocker = require('../src/local-docker')
 
 function log(topic, detail) {
   console.log(Colors.green(`${topic}:`), detail)
@@ -12,10 +14,10 @@ function error(topic, detail) {
   console.log(Colors.red(`${topic}:`), detail)
 }
 
-module.exports = function() {
+function main() {
   const docker = new LocalDocker()
 
-  CLI.version('0.1.0')
+  CLI.version('0.2.0')
 
   CLI.command('run [instance_name]')
     .option(
@@ -49,7 +51,7 @@ module.exports = function() {
               if (!progressBar) {
                 totalProgress = Object.keys(runProgress.progress).length * 100
                 progressBar = new ProgressBar(
-                  `${Colors.green('Run:')} Downloading [${Colors.magenta(
+                  `${Colors.green('Run:')} Downloading image [${Colors.magenta(
                     ':bar'
                   )}] :percent`,
                   {
@@ -72,8 +74,12 @@ module.exports = function() {
               lastProgress = currentProgress
               return false
             case LocalDocker.RUN_STATUS.IMAGE_PULL_EXTRACTING:
-              progressBar.tick(totalProgress - lastProgress)
-              return log('Run', 'Extracting image')
+              if (lastProgress < totalProgress) {
+                progressBar.tick(totalProgress - lastProgress)
+                lastProgress = totalProgress
+                log('Run', 'Extracting image')
+              }
+              return false
             case LocalDocker.RUN_STATUS.IMAGE_PULL_DONE:
               return log('Run', 'Image ready')
             case LocalDocker.RUN_STATUS.CONTAINER_FOUND:
@@ -115,3 +121,5 @@ module.exports = function() {
     CLI.outputHelp()
   }
 }
+
+main()
