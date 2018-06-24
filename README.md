@@ -1,6 +1,6 @@
 # EOS Local
 
-Node.js module for running local EOS docker container. It supports both CLI and normal node module.
+Node.js module for running local EOS docker container. It supports both CLI and regular Node.js module.
 
 [![NPM](https://nodei.co/npm/eos-local.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/eos-local/)
 
