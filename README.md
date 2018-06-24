@@ -9,11 +9,11 @@ Node.js module for running local EOS docker container. It supports both CLI and 
 
 ## Why build this library?
 
-Running EOS in docker makes it very convenient for developers to spin up local EOS test environments. Still, there's no convenient way to run the docker containers within Node.js environment. I build this while having [my jouney into EOS ecosystem](https://github.com/smiled0g/eos-experiments).
+I build this while having [my jouney into EOS ecosystem](https://github.com/smiled0g/eos-experiments). While running EOS in docker makes it very convenient for developers to spin up local EOS test environments, there's no convenient way to run the docker containers within Node.js environment. The library offers a simple way to do exactly that with Node.js. Via `npx` interface, it also functions as CLI tool for folks who don't want to deal with docker.
 
 ## Dependencies
 
-You need [Docker](https://www.docker.com/get-docker). Yep, that's it. The library is smart enough to pull the latest version of `eosio/eos-dev:latest` docker image for you if you don't already have it.
+You need [Docker](https://www.docker.com/get-docker) and [Node.js v8+](https://nodejs.org/en/). The library is smart enough to pull the latest version of `eosio/eos-dev:latest` docker image for you if you don't already have it.
 
 ## Node.js Installation
 

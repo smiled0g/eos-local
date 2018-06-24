@@ -1,6 +1,6 @@
 {
   "name": "eos-local",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Node.js tool to run EOS docker container",
   "main": "index.js",
   "author": "Paul Chonpimai <paul@bandprotocol.com>",
